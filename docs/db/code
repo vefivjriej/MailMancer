@@ -1,0 +1,55 @@
+// Для сайта https://dbdiagram.io/d
+Table users {
+  id integer [primary key]
+  name varchar
+  company_id integer
+  role varchar
+}
+
+Table user_companies {
+  id integer [primary key]
+  name varchar
+  work_email varchar
+  work_email_password varchar
+}
+
+Table orders {
+  id integer [primary key]
+  name varchar
+  user_id integer
+  download_address varchar
+  weight integer
+  length integer
+  width integer
+  height integer
+  additional_requirements varchar
+  create_date date
+  close_date date
+}
+
+Table order_recipients {
+  id integer [primary key]
+  order_id integer
+  recipient_company_id integer
+}
+
+Table carrier_companies {
+  id integer [primary key]
+  name varchar
+  user_companie_id integer
+}
+
+
+Table carrier_representative {
+  id integer [primary key]
+  carrier_company_id integer
+  email varchar
+  additionally varchar
+}
+
+Ref: carrier_companies.user_companie_id <> user_companies.id
+Ref: users.company_id > user_companies.id
+Ref: orders.user_id > users.id
+Ref: order_recipients.order_id > orders.id
+Ref: order_recipients.recipient_company_id > carrier_representative.id
+Ref: carrier_representative.carrier_company_id > carrier_companies.id
