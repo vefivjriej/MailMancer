@@ -1,0 +1,41 @@
+@startuml
+actor User
+participant "Фронтенд \n приложение" as front
+participant "Бэкенд \n приложение" as back
+participant "База \n данных" as db
+
+User -> front : Заполняет форму
+
+front -> back : Отправка запроса на проверку \n логина и пароля
+
+
+back --> db : Проверка данных
+
+db --[#red]> back : Такого пользователя не существует
+note left : Ошибка
+
+
+
+db --[#red]> back : Неверный пароль
+note left : Ошибка
+
+back -> front : Уведомление об ошибке
+front --> User : Сообщение:  Неверный логин или пароль
+
+db -> back : Логин и пароль подтверждены
+note left : Успех
+
+
+
+back -> front : Возврат токена
+front -> User : Сообщение:  Успешный вход
+
+
+
+
+
+
+
+
+
+@enduml

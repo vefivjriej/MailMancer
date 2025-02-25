@@ -1,0 +1,29 @@
+@startuml
+actor User
+participant "Фронтенд \n приложение" as front
+participant "Бэкенд \n приложение" as back
+participant "База \n данных" as db
+
+User -> front : Заполняет форму
+
+front -> back : Отправка данных на добавление
+
+
+back --> db : Проверка данных
+
+db --[#red]> back : Такой логин занят
+note left : Ошибка
+
+back --> front : Уведомление об ошибке
+front --> User : Сообщение: Такое имя пользователя занято
+
+
+db --> back : Успешное добавление
+note left : Успех
+
+
+back -> front : Возврат токена
+front -> User : Сообщение:  Успешная регистрация
+
+
+@enduml
