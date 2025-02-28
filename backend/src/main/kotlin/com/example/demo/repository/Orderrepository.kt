@@ -1,7 +1,6 @@
 package com.example.demo.repository
 
-import application.repository.com.example.demo.Entity.OrderEntity
-import application.repository.com.example.demo.Entity.UserCompanyEntity
+import com.example.demo.Entity.OrderEntity
 import org.springframework.data.jpa.repository.JpaRepository
 
 interface OrderRepository

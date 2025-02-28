@@ -1,7 +1,6 @@
 package com.example.demo.repository
 
-import application.repository.com.example.demo.Entity.CarrierRepresentativeEntity
-import application.repository.com.example.demo.Entity.OrderEntity
+import com.example.demo.Entity.CarrierRepresentativeEntity
 import org.springframework.data.jpa.repository.JpaRepository
 
 interface CarrierRepresentativeRepository
