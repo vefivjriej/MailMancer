@@ -15,7 +15,7 @@ import ru.example.demo.dto.response.RegisterHeadResponse
 class UserController(
     val userService: ru.example.demo.service.UserService
 ) {
-    @PostMapping("/head/sign-in")
+    @PostMapping("/head/sign-up")
     fun registerHead(@RequestBody request: RegisterHeadRequest): RegisterHeadResponse {
         return userService.registerHead(request)
     }
