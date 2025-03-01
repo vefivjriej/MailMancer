@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: demo
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres # сюда нужно вписать url для вашей базы
+    username: myuser
+    password: mypassword
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
