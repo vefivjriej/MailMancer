@@ -2,38 +2,33 @@ package ru.example.demo.entity
 import jakarta.persistence.*
 
 @Entity
-@Table(name="Orders")
+@Table(name="orders")
 data class OrderEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
 
-    @Column(nullable = true)
-    val name: String? = null,
+    val name: String,
 
-    @Column(name = "download_address",nullable = false)
-    val downloadAddress: String?=null,
+    @Column(name = "download_address")
+    val downloadAddress: String,
 
-    @Column(name = "delivery_address", nullable = false)
-    val deliveryAddress: String?=null,
+    @Column(name = "delivery_address")
+    val deliveryAddress: String,
 
-    @Column(nullable = false)
-    val weight: String?=null,
+    val weight: String,
 
-    @Column(nullable = false)
-    val length: String?=null,
+    val length: String,
 
-    @Column(nullable = false)
-    val height: String?=null,
+    val height: String,
 
-    @Column(nullable = false)
-    val width: String?=null,
+    val width: String,
 
-    @Column(name = "additional_requirements", nullable = true)
+    @Column(name = "additional_requirements")
     val additionalRequirements: String?=null,
 
-    @Column(name = "created_date",nullable = false)
-    val createdDate: String?=null,
+    @Column(name = "created_date")
+    val createdDate: String,
 
     @Column(name = "close_date", nullable = false)
     val closeDate: String?=null,

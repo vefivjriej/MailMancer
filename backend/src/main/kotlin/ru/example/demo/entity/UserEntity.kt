@@ -22,19 +22,24 @@ data class UserEntity(
 
     val token: String?,
 
-    @ManyToOne(cascade = [CascadeType.ALL])
+    @ManyToOne()
     @JoinColumn(name = "company_id", nullable = false)
     val company: UserCompanyEntity,
 
     @OneToMany(fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
     val orders: MutableList<OrderEntity> = mutableListOf(),
 
-)
+) {
 
-fun UserEntity.toUser(): User = User(
-    id = id,
-    name = name,
-    password = password,
-    role = role,
-    company = company.toUserCompany()
-)
+    fun toUser(companyId: Long? =null): User {
+
+        return User(
+            id = id,
+            name = name,
+            password = password,
+            role = role,
+            company = company.toUserCompany()
+
+        )
+    }
+}

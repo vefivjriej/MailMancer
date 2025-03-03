@@ -6,9 +6,9 @@ import ru.example.demo.dto.request.RegisterHeadRequest
 import ru.example.demo.dto.response.RegisterHeadResponse
 import ru.example.demo.entity.UserCompanyEntity
 import ru.example.demo.entity.UserEntity
-import ru.example.demo.entity.toUser
 import ru.example.demo.repository.UserCompanyRepository
 import java.util.*
+import kotlin.jvm.optionals.getOrElse
 
 @Service
 class UserService (
@@ -35,8 +35,9 @@ class UserService (
             token = token
         )
         val savedUser = userRepository.save(user)
+
         return RegisterHeadResponse(
-            id = savedUser.toUser().id,
+            id = savedUser.id,
             token = token
 
         )

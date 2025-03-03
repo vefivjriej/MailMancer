@@ -17,14 +17,18 @@ data class UserCompanyEntity(
 
     val password:String,
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
+    @OneToMany(mappedBy = "company", fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
     val users: MutableList<UserEntity> = mutableListOf(),
-)
 
-fun UserCompanyEntity.toUserCompany(): UserCompany = UserCompany(
-    id = id,
-    name = name,
-    email = email,
-    password = password,
-    users = users.map { it.toUser() }
-)
+    ) {
+    fun toUserCompany(): UserCompany = UserCompany(
+        id = id,
+        name = name,
+        email = email,
+        password = password,
+        users = users.map { it.id }
+    )
+    override fun toString(): String {
+        return "UserCompanyEntity(id=$id, name=$name, email=$email, password=$password, users=${users.map { it.id }})"
+    }
+}
