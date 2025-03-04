@@ -28,6 +28,7 @@ class UserService (
         val savedCompany = userCompanyRepository.save(company)
 
         val user = UserEntity(
+            login = request.headLogin,
             name = request.headName,
             password = request.headPassword,
             role = UserRoles.HEAD,

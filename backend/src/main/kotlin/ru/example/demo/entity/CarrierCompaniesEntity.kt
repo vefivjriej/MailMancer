@@ -11,6 +11,5 @@ data class CarrierCompanyEntity (
 
     val userCompanyId:Long?=null,
 
-    @Column(nullable=true)
-    val name: String?=null,
+    val name: String,
 )

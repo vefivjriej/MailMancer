@@ -14,6 +14,8 @@ data class UserEntity(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
 
+    val login: String,
+
     val name: String,
 
     val password: String,
@@ -35,6 +37,7 @@ data class UserEntity(
 
         return User(
             id = id,
+            login = login,
             name = name,
             password = password,
             role = role,
