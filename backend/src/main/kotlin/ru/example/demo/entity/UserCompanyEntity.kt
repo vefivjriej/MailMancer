@@ -13,6 +13,7 @@ data class UserCompanyEntity(
 
     val name: String,
 
+    @Column(unique = true, nullable = false)
     val email:String,
 
     val password:String,

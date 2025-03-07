@@ -8,6 +8,6 @@ import ru.example.demo.entity.UserCompanyEntity
 import java.util.*
 
 interface UserCompanyRepository : JpaRepository<UserCompanyEntity, Long> {
-
+    fun findByEmail(email: String): UserCompanyEntity?
 
 }

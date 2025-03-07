@@ -17,6 +17,8 @@ class UserService (
 ) {
     fun registerHead(request: RegisterHeadRequest): RegisterHeadResponse {
 
+//        val existUserCompany = userCompanyRepository.fin
+
         val token = generateToken()
 
         val company= UserCompanyEntity(
