@@ -7,7 +7,7 @@ import jakarta.persistence.*
 data class OrderRecepientEntity (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
+    val id: Long = 0,
 
     @Column(nullable=false)
     val order_id:Long?=null,

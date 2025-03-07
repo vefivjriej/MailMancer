@@ -7,9 +7,11 @@ import jakarta.persistence.*
 data class CarrierCompanyEntity (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
+    val id: Long = 0,
 
     val userCompanyId:Long?=null,
+    @OneToMany(mappedBy = "company", fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
+    val representatives: MutableList<OrderEntity> = mutableListOf(),
 
     val name: String,
 )

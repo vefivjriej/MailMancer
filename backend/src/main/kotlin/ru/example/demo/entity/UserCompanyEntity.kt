@@ -9,7 +9,7 @@ import ru.example.demo.dto.model.UserCompany
 data class UserCompanyEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
+    val id: Long = 0,
 
     val name: String,
 

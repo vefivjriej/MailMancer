@@ -7,7 +7,7 @@ import jakarta.persistence.*
 data class CarrierRepresentativeEntity (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
+    val id: Long = 0,
 
     val carrierCompanyId: Long,
 

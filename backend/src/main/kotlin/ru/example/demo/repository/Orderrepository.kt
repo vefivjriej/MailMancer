@@ -1,8 +1,9 @@
 package ru.example.demo.repository
 
 import org.springframework.data.jpa.repository.JpaRepository
+import ru.example.demo.entity.OrderEntity
 
 interface OrderRepository
-    : JpaRepository<ru.example.demo.entity.OrderEntity, Long>
+    : JpaRepository<OrderEntity, Long>
 {
 }
