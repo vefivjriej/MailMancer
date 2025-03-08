@@ -31,9 +31,9 @@ data class UserEntity(
     @OneToMany(fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
     val orders: MutableList<OrderEntity> = mutableListOf(),
 
-) {
+    ) {
 
-    fun toUser(companyId: Long? =null): User {
+    fun toUser(companyId: Long? = null): User {
 
         return User(
             id = id,

@@ -11,7 +11,7 @@ data class CarrierRepresentativeEntity (
 
     @ManyToOne()
     @JoinColumn(name = "carrier_company_id", nullable = false)
-    val userCompany: CarrierCompanyEntity,
+    val carrierCompany: CarrierCompanyEntity,
 
     val email: String,
 
