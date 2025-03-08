@@ -2,16 +2,18 @@
 Table users {
   id integer [primary key]
   name varchar
+  login varchar
   password hash
   company_id integer
   role varchar
+  token varchar
 }
 
 Table user_companies {
   id integer [primary key]
   name varchar
-  work_email varchar
-  work_email_password varchar
+  email varchar
+  password varchar
 }
 
 Table orders {
@@ -38,7 +40,7 @@ Table order_recipients {
 Table carrier_companies {
   id integer [primary key]
   name varchar
-  user_companie_id integer
+  user_company_id integer
 }
 
 
@@ -49,9 +51,20 @@ Table carrier_representative {
   additionally varchar
 }
 
-Ref: carrier_companies.user_companie_id <> user_companies.id
+Table user_invites {
+  id integer [primary key]
+  token varchar
+  used bool
+  createdAt datetime
+  user_company_id integer
+}
+
+
+Ref: carrier_companies.user_company_id > user_companies.id
 Ref: users.company_id > user_companies.id
 Ref: orders.user_id > users.id
 Ref: order_recipients.order_id > orders.id
 Ref: order_recipients.recipient_company_id > carrier_representative.id
 Ref: carrier_representative.carrier_company_id > carrier_companies.id
+ref: user_invites.user_company_id > user_companies.id
+
