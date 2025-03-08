@@ -1,7 +1,7 @@
 package ru.example.demo.exception
 
-import jakarta.persistence.EntityNotFoundException
-import org.springframework.http.HttpStatus
+
+import io.swagger.v3.oas.annotations.Hidden
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
@@ -9,6 +9,7 @@ import ru.example.demo.dto.response.ErrorResponse
 import ru.example.demo.exception.type.BadRequestException
 import ru.example.demo.exception.type.EntityAlreadyExistsException
 
+@Hidden
 @RestControllerAdvice
 class GlobalExceptionHandler {
 
@@ -20,8 +21,4 @@ class GlobalExceptionHandler {
     fun handleEntityAlreadyExistsException(exception: EntityAlreadyExistsException) =
         ResponseEntity.status(409).body(ErrorResponse(exception.message ?: "CONFLICT"))
 
-    @ExceptionHandler(Exception::class)
-    fun handleGeneralException(ex: Exception): ResponseEntity<Map<String, String>> {
-        return ResponseEntity(mapOf("error" to "Внутренняя ошибка сервера"), HttpStatus.INTERNAL_SERVER_ERROR)
-    }
 }

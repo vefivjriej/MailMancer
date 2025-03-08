@@ -10,8 +10,6 @@ data class CarrierCompanyEntity (
     val id: Long = 0,
 
     val userCompanyId:Long?=null,
-    @OneToMany(mappedBy = "company", fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
-    val representatives: MutableList<OrderEntity> = mutableListOf(),
 
     val name: String,
 )

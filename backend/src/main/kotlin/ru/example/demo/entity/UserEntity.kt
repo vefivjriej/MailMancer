@@ -4,7 +4,6 @@ package ru.example.demo.entity
 import jakarta.persistence.*
 import ru.example.demo.dto.enums.UserRoles
 import ru.example.demo.dto.model.User
-import ru.example.demo.dto.model.UserCompany
 
 @Entity
 @Table(name = "users")
@@ -14,6 +13,7 @@ data class UserEntity(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
 
+    @Column(unique = true)
     val login: String,
 
     val name: String,

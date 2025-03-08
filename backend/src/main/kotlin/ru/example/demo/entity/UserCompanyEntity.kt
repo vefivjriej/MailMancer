@@ -1,7 +1,6 @@
 package ru.example.demo.entity
 
 import jakarta.persistence.*
-import ru.example.demo.dto.model.User
 import ru.example.demo.dto.model.UserCompany
 
 @Entity

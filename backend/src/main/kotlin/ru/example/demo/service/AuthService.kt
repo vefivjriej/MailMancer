@@ -10,24 +10,20 @@ import ru.example.demo.entity.UserEntity
 import ru.example.demo.exception.type.EntityAlreadyExistsException
 import ru.example.demo.repository.UserCompanyRepository
 import java.util.*
-import kotlin.jvm.optionals.getOrElse
 
 
 @Service
-class UserService (
+class AuthService (
     val userRepository: ru.example.demo.repository.UserRepository,
     val userCompanyRepository: UserCompanyRepository
 ) {
     @Transactional
     fun registerHead(request: RegisterHeadRequest): RegisterHeadResponse {
-
-        val existUserCompany = userCompanyRepository.findByEmail(request.email)
-        if (existUserCompany != null) {
+        userCompanyRepository.findByEmail(request.email).ifPresent {
             throw EntityAlreadyExistsException("Компания с ${request.email} уже существует")
         }
 
-        val existUser = userRepository.findByLogin(request.headLogin)
-        if (existUser != null) {
+        userRepository.findByLogin(request.headLogin).ifPresent {
             throw EntityAlreadyExistsException("Пользователь с ${request.headName} уже существует")
         }
 

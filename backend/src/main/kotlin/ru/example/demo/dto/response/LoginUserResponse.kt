@@ -1,7 +1,5 @@
 package ru.example.demo.dto.response
 
-
-data class RegisterHeadResponse(
-    val id : Long,
+data class LoginUserResponse (
     val token: String
 )
