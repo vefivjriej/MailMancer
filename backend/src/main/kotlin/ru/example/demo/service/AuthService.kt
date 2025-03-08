@@ -97,6 +97,7 @@ class AuthService(
         )
     }
 
+    @Transactional
     fun loginUser(request: LoginUserRequest): AuthResponse {
         val user = userRepository.findByLogin(request.login).getOrElse {
             throw NotFoundException("Такого пользователя не существует")
