@@ -4,6 +4,7 @@ package ru.example.demo.entity
 import jakarta.persistence.*
 import ru.example.demo.dto.enums.UserRoles
 import ru.example.demo.dto.model.User
+import ru.example.demo.exception.type.UnauthorizedException
 
 @Entity
 @Table(name = "users")
@@ -22,7 +23,8 @@ data class UserEntity(
 
     val role: UserRoles,
 
-    val token: String?,
+    @Column(unique = true)
+    var token: String,
 
     @ManyToOne()
     @JoinColumn(name = "company_id", nullable = false)
@@ -44,5 +46,11 @@ data class UserEntity(
             company = company.toUserCompany()
 
         )
+    }
+
+    fun checkPassword(userPassword: String) {
+        if (password != userPassword) {
+            throw UnauthorizedException("Неверный логи или пароль")
+        }
     }
 }

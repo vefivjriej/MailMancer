@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.*
 import ru.example.demo.dto.request.RegisterHeadRequest
 import ru.example.demo.service.AuthService
 import ru.example.demo.dto.request.LoginUserRequest
-import ru.example.demo.dto.response.LoginUserResponse
-import ru.example.demo.dto.response.RegisterHeadResponse
+import ru.example.demo.dto.request.RegisterManagerRequest
+import ru.example.demo.dto.response.AuthResponse
 
 
 @RestController
@@ -15,24 +15,19 @@ class AuthController(
     val authService: AuthService
 ) {
     @PostMapping("/head/sign-up")
-    fun registerHead(@RequestBody request: RegisterHeadRequest): RegisterHeadResponse =
+    fun registerHead(@RequestBody request: RegisterHeadRequest): AuthResponse =
         authService.registerHead(request)
 
     @PostMapping("/manager/sign-up")
-    fun registerManager(@RequestBody request: LoginUserRequest): LoginUserResponse {
-        TODO()
-    }
+    fun registerManager(@RequestBody request: RegisterManagerRequest): AuthResponse =
+        authService.registerManager(request)
 
     @PostMapping("/sign-in")
-    fun loginUser(@RequestBody request: LoginUserRequest): LoginUserResponse {
-        TODO()
-    }
+    fun loginUser(@RequestBody request: LoginUserRequest): AuthResponse =
+        authService.loginUser(request)
 
     @PostMapping("/generate-invite")
-    fun generateInvite(@RequestParam companyId: Long): String {
-        TODO()
-    }
-
-
+    fun generateInvite(@RequestHeader("Authorization") userToken: String): String =
+        authService.generateInvite(userToken)
 
 }
