@@ -1,5 +1,6 @@
 package ru.example.demo.entity
 
+
 import jakarta.persistence.*
 
 @Entity
@@ -9,7 +10,9 @@ data class CarrierCompanyEntity (
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
 
-    val userCompanyId:Long?=null,
+    @ManyToOne()
+    @JoinColumn(name = "user_company_id", nullable = false)
+    val userCompany: UserCompanyEntity,
 
     val name: String,
 )

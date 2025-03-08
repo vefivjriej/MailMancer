@@ -35,5 +35,14 @@ data class OrderEntity(
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    val user: UserEntity
+    val user: UserEntity,
+
+    @ManyToMany
+    @JoinTable(
+        name = "order_recipients",
+        joinColumns = [JoinColumn(name = "order_id")],
+        inverseJoinColumns = [JoinColumn(name = "recipient_id")]
+    )
+    val recipients: MutableSet<CarrierRepresentativeEntity> = mutableSetOf()
+
 )

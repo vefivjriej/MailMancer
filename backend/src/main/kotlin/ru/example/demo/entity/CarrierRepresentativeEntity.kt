@@ -9,11 +9,14 @@ data class CarrierRepresentativeEntity (
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
 
-    val carrierCompanyId: Long,
+    @ManyToOne()
+    @JoinColumn(name = "carrier_company_id", nullable = false)
+    val userCompany: CarrierCompanyEntity,
 
     val email: String,
 
-    @Column(nullable = true)
     val additionally: String?=null,
-) {
-}
+
+    @ManyToMany(mappedBy = "recipients")
+    val orders: MutableSet<OrderEntity> = mutableSetOf()
+)
