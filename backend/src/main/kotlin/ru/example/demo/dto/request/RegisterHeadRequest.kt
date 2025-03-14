@@ -1,6 +1,6 @@
 package ru.example.demo.dto.request
 
-data class RegisterHeadRequest (
+data class RegisterHeadRequest(
     val headLogin: String,
     val headName: String,
     val headPassword: String,
