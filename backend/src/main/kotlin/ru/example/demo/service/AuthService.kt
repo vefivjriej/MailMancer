@@ -26,11 +26,10 @@ class AuthService(
     private val inviteRepository: InviteRepository
 ) {
     @Transactional
-    fun registerHead(request: RegisterHeadRequest): AuthResponse {
+    fun registerHead(request: RegisterHeadRequest): UserEntity {
         userCompanyRepository.findByEmail(request.email).ifPresent {
             throw EntityAlreadyExistsException("Почта ${request.email} занята")
         }
-
         userRepository.findByLogin(request.headLogin).ifPresent {
             throw EntityAlreadyExistsException("Логин ${request.headName} занят")
         }
@@ -55,16 +54,11 @@ class AuthService(
         )
         val savedUser = userRepository.save(user)
 
-        return AuthResponse(
-            userId = savedUser.id,
-            token = savedUser.token,
-            companyId = savedCompany.id,
-
-            )
+        return savedUser
     }
 
     @Transactional
-    fun registerManager(request: RegisterManagerRequest): AuthResponse {
+    fun registerManager(request: RegisterManagerRequest): UserEntity {
         val invite = inviteRepository.findByToken(request.inviteToken).getOrElse {
             throw NotFoundException("Приглашение недействительно")
         }
@@ -90,15 +84,11 @@ class AuthService(
 
         val savedUser = userRepository.save(newUser)
 
-        return AuthResponse(
-            userId = savedUser.id,
-            token = savedUser.token,
-            companyId = company.id,
-        )
+        return savedUser
     }
 
     @Transactional
-    fun loginUser(request: LoginUserRequest): AuthResponse {
+    fun loginUser(request: LoginUserRequest): UserEntity {
         val user = userRepository.findByLogin(request.login).getOrElse {
             throw NotFoundException("Такого пользователя не существует")
         }
@@ -108,11 +98,7 @@ class AuthService(
 
         val savedUser = userRepository.save(user)
 
-        return AuthResponse(
-            userId = savedUser.id,
-            token = savedUser.token,
-            companyId = savedUser.company.id,
-        )
+        return savedUser
     }
 
 

@@ -4,6 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository
 import ru.example.demo.entity.CarrierRepresentativeEntity
 
 interface CarrierRepresentativeRepository
-    : JpaRepository<CarrierRepresentativeEntity, Long>
-{
+    : JpaRepository<CarrierRepresentativeEntity, Long> {
 }
