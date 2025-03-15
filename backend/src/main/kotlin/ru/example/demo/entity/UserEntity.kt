@@ -38,10 +38,10 @@ data class UserEntity(
     fun toUser(companyId: Long? = null): User {
 
         return User(
-            id = id,
             login = login,
             name = name,
             password = password,
+            token = token,
             role = role,
             company = company.toUserCompany()
 

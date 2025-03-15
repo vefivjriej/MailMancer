@@ -22,11 +22,9 @@ data class UserCompanyEntity(
 
     ) {
     fun toUserCompany(): UserCompany = UserCompany(
-        id = id,
         name = name,
         email = email,
         password = password,
-        users = users.map { it.id }
     )
 
     override fun toString(): String {

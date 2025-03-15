@@ -6,7 +6,6 @@ import ru.example.demo.dto.enums.UserRoles
 import ru.example.demo.dto.request.LoginUserRequest
 import ru.example.demo.dto.request.RegisterHeadRequest
 import ru.example.demo.dto.request.RegisterManagerRequest
-import ru.example.demo.dto.response.AuthResponse
 import ru.example.demo.entity.InviteEntity
 import ru.example.demo.entity.UserCompanyEntity
 import ru.example.demo.entity.UserEntity
@@ -15,15 +14,16 @@ import ru.example.demo.exception.type.NotFoundException
 import ru.example.demo.exception.type.UnauthorizedException
 import ru.example.demo.repository.InviteRepository
 import ru.example.demo.repository.UserCompanyRepository
-import java.util.*
+import ru.example.demo.repository.UserRepository
 import kotlin.jvm.optionals.getOrElse
 
 
 @Service
 class AuthService(
-    private val userRepository: ru.example.demo.repository.UserRepository,
+    private val userRepository: UserRepository,
     private val userCompanyRepository: UserCompanyRepository,
-    private val inviteRepository: InviteRepository
+    private val inviteRepository: InviteRepository,
+    private val tokenService: TokenService,
 ) {
     @Transactional
     fun registerHead(request: RegisterHeadRequest): UserEntity {
@@ -34,7 +34,7 @@ class AuthService(
             throw EntityAlreadyExistsException("Логин ${request.headName} занят")
         }
 
-        val token = generateToken()
+        val token = tokenService.generateToken()
 
         val company = UserCompanyEntity(
             name = request.companyName,
@@ -70,7 +70,7 @@ class AuthService(
         invite.checkToken()
 
         val company = invite.company
-        val token = generateToken()
+        val token = tokenService.generateToken()
 
 
         val newUser = UserEntity(
@@ -94,7 +94,7 @@ class AuthService(
         }
         user.checkPassword(request.password)
 
-        user.token = generateToken()
+        user.token = tokenService.generateToken()
 
         val savedUser = userRepository.save(user)
 
@@ -111,7 +111,7 @@ class AuthService(
 
         val company = user.company
 
-        val token = generateToken()
+        val token = tokenService.generateToken()
 
         val invite = InviteEntity(
             company = company,
@@ -123,7 +123,4 @@ class AuthService(
         return "https://localhost:8080/manager/sign-up?token=${savedInvite.token}"
     }
 
-    fun generateToken(): String {
-        return UUID.randomUUID().toString()
-    }
 }

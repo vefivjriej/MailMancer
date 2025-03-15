@@ -3,7 +3,6 @@ package ru.example.demo.dto.model
 import java.time.LocalDateTime
 
 data class Order (
-    val id: Int,
     val name: String,
     val downloadAddress: String,
     val deliveryAddress: String,

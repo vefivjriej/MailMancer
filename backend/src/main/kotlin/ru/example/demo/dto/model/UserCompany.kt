@@ -1,11 +1,16 @@
 package ru.example.demo.dto.model
 
-import ru.example.demo.entity.UserEntity
+import ru.example.demo.entity.UserCompanyEntity
+
 
 data class UserCompany (
-    val id: Long?,
     val name: String,
     val email: String,
     val password: String,
-    val users: List<Long?>
-)
+) {
+    fun toEntity() = UserCompanyEntity(
+        name = name,
+        email = email,
+        password = password
+    )
+}
