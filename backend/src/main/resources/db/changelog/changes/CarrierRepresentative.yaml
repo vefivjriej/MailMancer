@@ -1,0 +1,70 @@
+databaseChangeLog:
+  - changeSet:
+      id: 4
+      author: Великий zzz
+      changes:
+        - createTable:
+            tableName: carrier_representative
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: carrier_company_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: additionally
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+
+        - addForeignKeyConstraint:
+            baseTableName: carrier_representative
+            baseColumnNames: carrier_company_id
+            constraintName: fk_carrier_representative_carrier_company
+            referencedTableName: carrier_companies
+            referencedColumnNames: id
+
+        - createTable:
+            tableName: carrier_representative_orders
+            columns:
+              - column:
+                  name: carrier_representative_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: order_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+
+        - addPrimaryKey:
+            tableName: carrier_representative_orders
+            columnNames: carrier_representative_id, order_id
+            constraintName: pk_carrier_representative_orders
+
+        - addForeignKeyConstraint:
+            baseTableName: carrier_representative_orders
+            baseColumnNames: carrier_representative_id
+            constraintName: fk_carrier_representative_orders_representative
+            referencedTableName: carrier_representative
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: carrier_representative_orders
+            baseColumnNames: order_id
+            constraintName: fk_carrier_representative_orders_order
+            referencedTableName: orders
+            referencedColumnNames: id

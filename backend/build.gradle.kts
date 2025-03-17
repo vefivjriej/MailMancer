@@ -36,7 +36,9 @@ dependencies {
 	testImplementation("io.kotest:kotest-runner-junit5:5.7.2")
 	testImplementation("io.kotest:kotest-assertions-core:5.7.2")
 	testImplementation("io.mockk:mockk:1.13.16")
+	implementation("org.liquibase:liquibase-core:4.27.0")
 }
+
 
 
 

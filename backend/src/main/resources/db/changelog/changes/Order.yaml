@@ -1,0 +1,105 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: захар
+      changes:
+        - createTable:
+            tableName: orders
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: download_address
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: delivery_address
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: weight
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: length
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: height
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: width
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: additional_requirements
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: created_date
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: close_date
+                  type: timestamp
+                  constraints:
+                    nullable: true
+
+        - addForeignKeyConstraint:
+            baseTableName: orders
+            baseColumnNames: user_id
+            constraintName: fk_orders_user
+            referencedTableName: users
+            referencedColumnNames: id
+
+        - createTable:
+            tableName: order_recipients
+            columns:
+              - column:
+                  name: order_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: recipient_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+
+        - addPrimaryKey:
+            tableName: order_recipients
+            columnNames: order_id, recipient_id
+            constraintName: pk_order_recipients
+
+        - addForeignKeyConstraint:
+            baseTableName: order_recipients
+            baseColumnNames: order_id
+            constraintName: fk_order_recipients_order
+            referencedTableName: orders
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: order_recipients
+            baseColumnNames: recipient_id
+            constraintName: fk_order_recipients_recipient
+            referencedTableName: carrier_representative
+            referencedColumnNames: id

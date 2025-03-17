@@ -1,0 +1,13 @@
+  databaseChangeLog:
+    - include:
+        file: db/changelog/changes/CarrierCompany.yaml
+    - include:
+        file: db/changelog/changes/CarrierRepresentative.yaml
+    - include:
+        file: db/changelog/changes/Invite.yaml
+    - include:
+        file: db/changelog/changes/Order.yaml
+    - include:
+        file: db/changelog/changes/User.yaml
+    - include:
+        file: db/changelog/changes/UserCompany.yaml

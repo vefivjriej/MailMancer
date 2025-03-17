@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: Великий zzz
+      changes:
+        - createTable:
+            tableName: carrier_companies
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_company_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseTableName: carrier_companies
+            baseColumnNames: user_company_id
+            constraintName: fk_carrier_companies_user_company
+            referencedTableName: user_companies
+            referencedColumnNames: id
